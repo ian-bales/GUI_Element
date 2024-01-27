@@ -1,14 +1,15 @@
-#include <GUI_Elemenlcd.h>
+#include <GUI_Element.h>
 
 // simple momentary switch to call a function on button release
 SimpleSwitch::SimpleSwitch(int x, int y, int width, int height,
-						int color, void (*func)()) {
+						int color, void (*func)(), Adafruit_ILI9341 *lcd) {
 	_x=x;
 	_y=y;
 	_width=width;
 	_height=height;
 	_color=color;
 	_func=func;
+	_lcd=lcd;
 }
 
 void SimpleSwitch::updateAndDraw(int x, int y) {
@@ -27,7 +28,7 @@ bool SimpleSwitch::checkTouch(int x, int y) {
 //toggle switch to call a function on button release depending on toggle state
 ToggleSwitch::ToggleSwitch(int x, int y, int width, int height,
 						int off_color, int on_color, void (*off_func)(),
-						void (*on_func)()) {
+						void (*on_func)(), Adafruit_ILI9341 *lcd) {
 	_x=x;
 	_y=y;
 	_width=width;
@@ -36,6 +37,7 @@ ToggleSwitch::ToggleSwitch(int x, int y, int width, int height,
 	_on_color=on_color;
 	_off_func=off_func;
 	_on_func=on_func;
+	_lcd=lcd;
 	
 	_toggle_state=true;
 	_last_touch=true;
@@ -76,5 +78,5 @@ void Slider::updateAndDraw(int x, int y) {
 }
 
 bool Slider::checkTouch(int x, int y) {
-	return ((x>=_x-_size/2)&&(x<=_x+size/2.0));
+	return ((x>=_x-_size/2)&&(x<=_x+_size/2.0));
 }

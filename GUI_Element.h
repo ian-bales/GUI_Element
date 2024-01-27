@@ -1,4 +1,4 @@
-#ifndef GUI_Eement
+#ifndef GUI_Element
 #define GUI_Element
 
 #include <Adafruit_ILI9341.h>
@@ -18,7 +18,7 @@ class SimpleSwitch {
 		void (*_func)();
 		Adafruit_ILI9341 *_lcd;
 		bool _last_touch;
-}
+};
 
 class ToggleSwitch {
 	public:
@@ -39,7 +39,7 @@ class ToggleSwitch {
 		Adafruit_ILI9341 *_lcd;
 		bool _toggle_state;
 		bool _last_touch;
-}
+};
 
 class Slider {
 	public:
@@ -57,6 +57,6 @@ class Slider {
 		float _max;
 		Adafruit_ILI9341 *_lcd;
 		int _length;
-}
+};
 
 #endif
