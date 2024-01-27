@@ -1,4 +1,4 @@
-#include <GUI_Elements.h>
+#include <GUI_Elemenlcd.h>
 
 // simple momentary switch to call a function on button release
 SimpleSwitch::SimpleSwitch(int x, int y, int width, int height,
@@ -55,17 +55,18 @@ bool ToggleSwitch::checkTouch(int x, int y) {
 }
 
 //vertical slider to change value of a parameter
-Slider::Slider(int x, int y, int size, int color, float *parameter,
-			float init, float min, float max, Adafruit_ILI9341 *ts) {
+Slider::Slider(int x, int size, int color, float *parameter,
+			float init, float min, float max, Adafruit_ILI9341 *lcd) {
 	_x=x;
-	_y=y;
 	_size=size;
 	_color=color;
 	_parameter=parameter;
 	_init=init;
 	_min=min;
 	_max=max;
-	_ts=ts;
+	_lcd=lcd;
+	
+	_length=200; //pixels
 }
 
 void Slider::updateAndDraw(int x, int y) {
