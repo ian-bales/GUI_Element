@@ -5,8 +5,11 @@
 
 class SimpleSwitch {
 	public:
-		SimpleSwitch(int x, int y, int width, int height,
-					int color, void (*func)(), Adafruit_ILI9341 *lcd);
+		SimpleSwitch();
+		SimpleSwitch(int x, int y, int width, int height, int color,
+						void (*func)(), Adafruit_ILI9341 *lcd);
+		void setSpecs(int x, int y, int width, int height, int color,
+						void (*func)(), Adafruit_ILI9341 *lcd);
 		void updateAndDraw(int x, int y);
 	private:
 		bool checkTouch(int x, int y);
@@ -22,9 +25,13 @@ class SimpleSwitch {
 
 class ToggleSwitch {
 	public:
+		ToggleSwitch();
 		ToggleSwitch(int x, int y, int width, int height,
-			int off_color, int on_color, void (*off_func)(),
-			void (*on_func)(), Adafruit_ILI9341 *lcd);
+						int off_color, int on_color, void (*off_func)(),
+						void (*on_func)(), Adafruit_ILI9341 *lcd);
+		void setSpecs(int x, int y, int width, int height,
+						int off_color, int on_color, void (*off_func)(),
+						void (*on_func)(), Adafruit_ILI9341 *lcd);
 		void updateAndDraw(int x, int y);
 	private:
 		bool checkTouch(int x, int y);
@@ -43,8 +50,11 @@ class ToggleSwitch {
 
 class Slider {
 	public:
+		Slider();
 		Slider(int x, int size, int color, float *parameter,
-			float init, float min, float max, Adafruit_ILI9341 *lcd);
+				float init, float min, float max, Adafruit_ILI9341 *lcd);
+		void setSpecs(int x, int size, int color, float *parameter,
+						float init, float min, float max, Adafruit_ILI9341 *lcd);
 		void updateAndDraw(int x, int y);
 	private:
 		bool checkTouch(int x, int y);
