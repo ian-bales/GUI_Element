@@ -21,6 +21,7 @@ class SimpleSwitch {
 		void (*_func)();
 		Adafruit_ILI9341 *_lcd;
 		bool _last_touch;
+		bool _start;
 };
 
 class ToggleSwitch {
