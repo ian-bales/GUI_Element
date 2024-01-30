@@ -149,13 +149,14 @@ Slider::Slider(int x, int size, int color, float *parameter,
 	_size = size;
 	_color = color;
 	_parameter = parameter;
-	*parameter=init;
 	_min = min;
 	_max = max;
 	_lcd = lcd;
 	
 	_length = ILI9341_TFTWIDTH-60; //pixels
 	_start=true;
+	
+	*parameter=init;
 }
 
 void Slider::setSpecs(int x, int size, int color, float *parameter,
@@ -164,13 +165,14 @@ void Slider::setSpecs(int x, int size, int color, float *parameter,
 	_size = size;
 	_color = color;
 	_parameter = parameter;
-	*parameter=init;
 	_min = min;
 	_max = max;
 	_lcd = lcd;
 	
 	_length = ILI9341_TFTWIDTH-60; //pixels
 	_start=true;
+	
+	*parameter=init;
 }
 
 void Slider::updateAndDraw(int x, int y) {	
