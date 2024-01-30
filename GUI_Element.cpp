@@ -153,7 +153,7 @@ Slider::Slider(int x, int size, int color, float *parameter,
 	_max = max;
 	_lcd = lcd;
 	
-	_length = ILI9341_TFTWIDTH-60; //pixels
+	_length = ILI9341_TFTWIDTH - 60; //pixels
 	_start=true;
 	
 	*parameter=init;
@@ -169,7 +169,7 @@ void Slider::setSpecs(int x, int size, int color, float *parameter,
 	_max = max;
 	_lcd = lcd;
 	
-	_length = ILI9341_TFTWIDTH-60; //pixels
+	_length = ILI9341_TFTWIDTH - 60; //pixels
 	_start=true;
 	
 	*parameter=init;
@@ -183,12 +183,13 @@ void Slider::updateAndDraw(int x, int y) {
 			*_parameter = _min;
 	
 		_lcd->fillRoundRect(_x - 2, 30, 5, _length, 2, ILI9341_DARKGREY);
+		_lcd->fillRoundRect(3 + _x - 1.5 * _size / 2, 3 + ILI9341_TFTWIDTH - (30 + _length * (*_parameter - _min) / (_max - _min) + _size / 2), 1.5 * _size, _size, 10, ILI9341_BLACK);
 		_lcd->fillRoundRect(_x - 1.5 * _size / 2, ILI9341_TFTWIDTH - (30 + _length * (*_parameter - _min) / (_max - _min) + _size / 2), 1.5 * _size, _size, 10, _color);
 		_start=false;
 	}
 	
 	if (checkTouch(x, y)) {
-		_lcd->fillRect(_x - 1.5 * _size / 2, ILI9341_TFTWIDTH - (30 + _length * (*_parameter - _min) / (_max - _min) + _size / 2), 1.5 * _size, _size, ILI9341_WHITE);
+		_lcd->fillRect(_x - 1.5 * _size / 2, ILI9341_TFTWIDTH - (30 + _length * (*_parameter - _min) / (_max - _min) + _size / 2), 3 + 1.5 * _size, 3 + _size, ILI9341_WHITE);
 		
 		*_parameter = _max - (_max - _min) * (y - 30) / _length;
 		
@@ -198,10 +199,11 @@ void Slider::updateAndDraw(int x, int y) {
 			*_parameter = _min;
 		
 		_lcd->fillRoundRect(_x - 2, 30, 5, _length, 2, ILI9341_DARKGREY);
+		_lcd->fillRoundRect(3 + _x - 1.5 * _size / 2, 3 + ILI9341_TFTWIDTH - (30 + _length * (*_parameter - _min) / (_max - _min) + _size / 2), 1.5 * _size, _size, 10, ILI9341_BLACK);
 		_lcd->fillRoundRect(_x - 1.5 * _size / 2, ILI9341_TFTWIDTH - (30 + _length * (*_parameter - _min) / (_max - _min) + _size / 2), 1.5 * _size, _size, 10, _color);
 	}
 }
 
 bool Slider::checkTouch(int x, int y) {
-	return ((x >= _x - 1.5 * _size / 2) && ( x <= _x + 1.5 * _size / 2));
+	return ((x >= _x - 1.5 * _size / 2) && ( x <= 3 + _x + 1.5 * _size / 2));
 }
