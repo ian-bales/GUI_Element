@@ -19,7 +19,7 @@ class SimpleSwitch {
 		int _height;
 		int _color;
 		void (*_func)();
-		Adafruit_ILI9341 *_lcd;
+		Adafruit_ILI9341 *_lcd_ptr;
 		bool _last_touch;
 		bool _start;
 };
@@ -44,7 +44,7 @@ class ToggleSwitch {
 		int _on_color;
 		void (*_off_func)();
 		void (*_on_func)();
-		Adafruit_ILI9341 *_lcd;
+		Adafruit_ILI9341 *_lcd_ptr;
 		bool _toggle_state;
 		bool _last_touch;
 };
@@ -62,10 +62,10 @@ class Slider {
 		int _x;
 		int _size;
 		int _color;
-		float *_parameter;
+		float *_parameter_ptr;
 		float _min;
 		float _max;
-		Adafruit_ILI9341 *_lcd;
+		Adafruit_ILI9341 *_lcd_ptr;
 		int _length;
 		bool _start;
 };
