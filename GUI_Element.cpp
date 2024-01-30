@@ -177,6 +177,11 @@ void Slider::setSpecs(int x, int size, int color, float *parameter,
 
 void Slider::updateAndDraw(int x, int y) {	
 	if (_start) {
+		if (*_parameter > _max)
+			*_parameter = _max;
+		else if (*_parameter < _min)
+			*_parameter = _min;
+	
 		_lcd->fillRoundRect(_x - 2, 30, 5, _length, 2, ILI9341_DARKGREY);
 		_lcd->fillRoundRect(_x - 1.5 * _size / 2, ILI9341_TFTWIDTH - (30 + _length * (*_parameter - _min) / (_max - _min) + _size / 2), 1.5 * _size, _size, 10, _color);
 		_start=false;
