@@ -37,7 +37,7 @@ void SimpleSwitch::setSpecs(int x, int y, int width, int height, int color,
 void SimpleSwitch::updateAndDraw(int x, int y) {
 	if (checkTouch(x, y)) {
 		if (!_last_touch) {
-			_lcd->fillRect(_x, _y, _width + 6, _height + 6, ILI9341_WHITE);
+			_lcd->fillRect(-1 + _x, -1 + _y, _width + 7, _height + 7, ILI9341_WHITE);
 			_lcd->fillRoundRect(_x + 6, _y + 6, _width, _height, 15, ILI9341_BLACK);
 			_lcd->fillRoundRect(_x + 3, _y + 3, _width, _height, 15, _color);
 
@@ -45,7 +45,7 @@ void SimpleSwitch::updateAndDraw(int x, int y) {
 		}
 	}
 	else if (_last_touch) {
-		_lcd->fillRect(_x, _y, _width + 6, _height + 6, ILI9341_WHITE);
+		_lcd->fillRect(-1 + _x, -1 + _y, _width + 7, _height + 7, ILI9341_WHITE);
 		_lcd->fillRoundRect(_x + 6, _y + 6, _width, _height, 15, ILI9341_BLACK);
 		_lcd->fillRoundRect(_x, _y, _width, _height, 15, _color);
 		
@@ -110,7 +110,7 @@ void ToggleSwitch::updateAndDraw(int x, int y) {
 			else
 				button_color=_off_color;
 
-			_lcd->fillRect(_x, _y, _width + 9, _height + 9, ILI9341_WHITE);
+			_lcd->fillRect(-1 + _x, -1 + _y, _width + 10, _height + 10, ILI9341_WHITE);
 			_lcd->fillRoundRect(_x + 9, _y + 9, _width, _height, 15, ILI9341_BLACK);
 			_lcd->fillRoundRect(_x + 6, _y + 6, _width, _height, 15,button_color);
 
@@ -119,7 +119,7 @@ void ToggleSwitch::updateAndDraw(int x, int y) {
 	}
 	else if (_last_touch) {
 		_toggle_state=!_toggle_state;
-		_lcd->fillRect(_x, _y, _width + 9, _height + 9, ILI9341_WHITE);
+		_lcd->fillRect(-1 + _x, -1 + _y, _width + 10, _height + 10, ILI9341_WHITE);
 		
 		if (_toggle_state) {
 			_lcd->fillRoundRect(_x + 9, _y + 9, _width, _height, 15, ILI9341_BLACK);
@@ -153,7 +153,8 @@ Slider::Slider(int x, int size, int color, float *parameter,
 	_max = max;
 	_lcd = lcd;
 	
-	_length = ILI9341_TFTWIDTH - 60; //pixels
+	_padding = 30;
+	_length = ILI9341_TFTWIDTH - _padding * 3.5; //pixels
 	_start=true;
 	
 	*parameter=init;
@@ -169,7 +170,8 @@ void Slider::setSpecs(int x, int size, int color, float *parameter,
 	_max = max;
 	_lcd = lcd;
 	
-	_length = ILI9341_TFTWIDTH - 60; //pixels
+	_padding = 30;
+	_length = ILI9341_TFTWIDTH - _padding * 3.5; //pixels
 	_start=true;
 	
 	*parameter=init;
@@ -182,25 +184,25 @@ void Slider::updateAndDraw(int x, int y) {
 		else if (*_parameter < _min)
 			*_parameter = _min;
 	
-		_lcd->fillRoundRect(_x - 2, 30, 5, _length, 2, ILI9341_DARKGREY);
-		_lcd->fillRoundRect(3 + _x - 1.5 * _size / 2, 3 + ILI9341_TFTWIDTH - (30 + _length * (*_parameter - _min) / (_max - _min) + _size / 2), 1.5 * _size, _size, 10, ILI9341_BLACK);
-		_lcd->fillRoundRect(_x - 1.5 * _size / 2, ILI9341_TFTWIDTH - (30 + _length * (*_parameter - _min) / (_max - _min) + _size / 2), 1.5 * _size, _size, 10, _color);
+		_lcd->fillRoundRect(_x - 2, _padding, 5, _length, 2, ILI9341_DARKGREY);
+		_lcd->fillRoundRect(3 + _x - 1.5 * _size / 2, 3 + _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 1.5 * _size, _size, 10, ILI9341_BLACK);
+		_lcd->fillRoundRect(_x - 1.5 * _size / 2, _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 1.5 * _size, _size, 10, _color);
 		_start=false;
 	}
 	
 	if (checkTouch(x, y)) {
-		_lcd->fillRect(_x - 1.5 * _size / 2, ILI9341_TFTWIDTH - (30 + _length * (*_parameter - _min) / (_max - _min) + _size / 2), 3 + 1.5 * _size, 3 + _size, ILI9341_WHITE);
+		_lcd->fillRect(-1 + _x - 1.5 * _size / 2, -1 + _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 4 + 1.5 * _size, 4 + _size, ILI9341_WHITE);
 		
-		*_parameter = _max - (_max - _min) * (y - 30) / _length;
+		*_parameter = _max - (_max - _min) * (y - _padding) / _length;
 		
 		if (*_parameter > _max)
 			*_parameter = _max;
 		else if (*_parameter < _min)
 			*_parameter = _min;
 		
-		_lcd->fillRoundRect(_x - 2, 30, 5, _length, 2, ILI9341_DARKGREY);
-		_lcd->fillRoundRect(3 + _x - 1.5 * _size / 2, 3 + ILI9341_TFTWIDTH - (30 + _length * (*_parameter - _min) / (_max - _min) + _size / 2), 1.5 * _size, _size, 10, ILI9341_BLACK);
-		_lcd->fillRoundRect(_x - 1.5 * _size / 2, ILI9341_TFTWIDTH - (30 + _length * (*_parameter - _min) / (_max - _min) + _size / 2), 1.5 * _size, _size, 10, _color);
+		_lcd->fillRoundRect(_x - 2, _padding, 5, _length, 2, ILI9341_DARKGREY);
+		_lcd->fillRoundRect(3 + _x - 1.5 * _size / 2, 3 + _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 1.5 * _size, _size, 10, ILI9341_BLACK);
+		_lcd->fillRoundRect(_x - 1.5 * _size / 2, _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 1.5 * _size, _size, 10, _color);
 	}
 }
 

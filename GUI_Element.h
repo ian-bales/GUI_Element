@@ -66,6 +66,7 @@ class Slider {
 		float _min;
 		float _max;
 		Adafruit_ILI9341 *_lcd;
+		int _padding;
 		int _length;
 		bool _start;
 };
