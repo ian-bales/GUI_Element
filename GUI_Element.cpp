@@ -37,7 +37,7 @@ void SimpleSwitch::setSpecs(int x, int y, int width, int height, int color,
 void SimpleSwitch::updateAndDraw(int x, int y) {
 	if (checkTouch(x, y)) {
 		if (!_last_touch) {
-			_lcd->fillRect(-1 + _x, -1 + _y, _width + 7, _height + 7, ILI9341_WHITE);
+			_lcd->fillRect(-1 + _x, -1 + _y, _width + 8, _height + 8, ILI9341_WHITE);
 			_lcd->fillRoundRect(_x + 6, _y + 6, _width, _height, 15, ILI9341_BLACK);
 			_lcd->fillRoundRect(_x + 3, _y + 3, _width, _height, 15, _color);
 
@@ -110,7 +110,7 @@ void ToggleSwitch::updateAndDraw(int x, int y) {
 			else
 				button_color=_off_color;
 
-			_lcd->fillRect(-1 + _x, -1 + _y, _width + 10, _height + 10, ILI9341_WHITE);
+			_lcd->fillRect(-1 + _x, -1 + _y, _width + 11, _height + 11, ILI9341_WHITE);
 			_lcd->fillRoundRect(_x + 9, _y + 9, _width, _height, 15, ILI9341_BLACK);
 			_lcd->fillRoundRect(_x + 6, _y + 6, _width, _height, 15,button_color);
 
@@ -119,7 +119,7 @@ void ToggleSwitch::updateAndDraw(int x, int y) {
 	}
 	else if (_last_touch) {
 		_toggle_state=!_toggle_state;
-		_lcd->fillRect(-1 + _x, -1 + _y, _width + 10, _height + 10, ILI9341_WHITE);
+		_lcd->fillRect(-1 + _x, -1 + _y, _width + 11, _height + 11, ILI9341_WHITE);
 		
 		if (_toggle_state) {
 			_lcd->fillRoundRect(_x + 9, _y + 9, _width, _height, 15, ILI9341_BLACK);
@@ -191,7 +191,7 @@ void Slider::updateAndDraw(int x, int y) {
 	}
 	
 	if (checkTouch(x, y)) {
-		_lcd->fillRect(-1 + _x - 1.5 * _size / 2, -1 + _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 4 + 1.5 * _size, 4 + _size, ILI9341_WHITE);
+		_lcd->fillRect(-1 + _x - 1.5 * _size / 2, -1 + _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 5 + 1.5 * _size, 5 + _size, ILI9341_WHITE);
 		
 		*_parameter = _max - (_max - _min) * (y - _padding) / _length;
 		
