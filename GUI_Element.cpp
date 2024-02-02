@@ -153,11 +153,11 @@ Slider::Slider(int x, int size, int color, float *parameter,
 	_max = max;
 	_lcd = lcd;
 	
-	_padding = 30;
-	_length = ILI9341_TFTWIDTH - _padding * 3.5; //pixels
+	_padding = 50;
+	_length = ILI9341_TFTWIDTH - _padding * 2; //pixels
 	_start=true;
 	
-	*parameter=init;
+	*_parameter = init;
 }
 
 void Slider::setSpecs(int x, int size, int color, float *parameter,
@@ -170,14 +170,15 @@ void Slider::setSpecs(int x, int size, int color, float *parameter,
 	_max = max;
 	_lcd = lcd;
 	
-	_padding = 30;
-	_length = ILI9341_TFTWIDTH - _padding * 3.5; //pixels
+	_padding = 50;
+	_length = ILI9341_TFTWIDTH - _padding * 2; //pixels
 	_start=true;
 	
-	*parameter=init;
+	*_parameter = init;
 }
 
-void Slider::updateAndDraw(int x, int y) {	
+//returns true upon update
+bool Slider::updateAndDraw(int x, int y) {
 	if (_start) {
 		if (*_parameter > _max)
 			*_parameter = _max;
@@ -187,6 +188,7 @@ void Slider::updateAndDraw(int x, int y) {
 		_lcd->fillRoundRect(_x - 2, _padding, 5, _length, 2, ILI9341_DARKGREY);
 		_lcd->fillRoundRect(3 + _x - 1.5 * _size / 2, 3 + _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 1.5 * _size, _size, 10, ILI9341_BLACK);
 		_lcd->fillRoundRect(_x - 1.5 * _size / 2, _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 1.5 * _size, _size, 10, _color);
+		
 		_start=false;
 	}
 	
@@ -203,7 +205,11 @@ void Slider::updateAndDraw(int x, int y) {
 		_lcd->fillRoundRect(_x - 2, _padding, 5, _length, 2, ILI9341_DARKGREY);
 		_lcd->fillRoundRect(3 + _x - 1.5 * _size / 2, 3 + _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 1.5 * _size, _size, 10, ILI9341_BLACK);
 		_lcd->fillRoundRect(_x - 1.5 * _size / 2, _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 1.5 * _size, _size, 10, _color);
+	
+		return true;
 	}
+	
+	return false;
 }
 
 bool Slider::checkTouch(int x, int y) {

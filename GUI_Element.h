@@ -56,7 +56,7 @@ class Slider {
 				float init, float min, float max, Adafruit_ILI9341 *lcd);
 		void setSpecs(int x, int size, int color, float *parameter,
 						float init, float min, float max, Adafruit_ILI9341 *lcd);
-		void updateAndDraw(int x, int y);
+		bool updateAndDraw(int x, int y);
 	private:
 		bool checkTouch(int x, int y);
 		int _x;
