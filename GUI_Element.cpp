@@ -41,10 +41,9 @@ void SimpleSwitch::updateAndDraw(int x, int y) {
 			_lcd->fillRoundRect(_x + 6, _y + 6, _width, _height, 15, ILI9341_BLACK);
 			_lcd->fillRoundRect(_x + 3, _y + 3, _width, _height, 15, _color);
 
-			_last_touch=true;
+			_last_touch = true;
 		}
-	}
-	else if (_last_touch) {
+	} else if (_last_touch) {		
 		_lcd->fillRect(-1 + _x, -1 + _y, _width + 7, _height + 7, ILI9341_WHITE);
 		_lcd->fillRoundRect(_x + 6, _y + 6, _width, _height, 15, ILI9341_BLACK);
 		_lcd->fillRoundRect(_x, _y, _width, _height, 15, _color);
@@ -52,9 +51,9 @@ void SimpleSwitch::updateAndDraw(int x, int y) {
 		if (!_start)
 			_func();
 		else
-			_start=false;
-
-		_last_touch=false;
+			_start = false;
+		
+		_last_touch = false;
 	}
 }
 
@@ -81,6 +80,7 @@ ToggleSwitch::ToggleSwitch(int x, int y, int width, int height,
 	
 	_toggle_state = true;
 	_last_touch = true;
+	_start = true;
 }
 
 void ToggleSwitch::setSpecs(int x, int y, int width, int height,
@@ -114,25 +114,26 @@ void ToggleSwitch::updateAndDraw(int x, int y) {
 			_lcd->fillRoundRect(_x + 9, _y + 9, _width, _height, 15, ILI9341_BLACK);
 			_lcd->fillRoundRect(_x + 6, _y + 6, _width, _height, 15,button_color);
 
-			_last_touch=true;
+			_last_touch = true;
 		}
-	}
-	else if (_last_touch) {
+	} else if (_last_touch) {
 		_toggle_state=!_toggle_state;
+		_last_touch=false;
+		
 		_lcd->fillRect(-1 + _x, -1 + _y, _width + 11, _height + 11, ILI9341_WHITE);
 		
 		if (_toggle_state) {
 			_lcd->fillRoundRect(_x + 9, _y + 9, _width, _height, 15, ILI9341_BLACK);
 			_lcd->fillRoundRect(_x + 3, _y + 3, _width, _height, 15, _on_color);
+			
 			_on_func();
 		}
 		else {
 			_lcd->fillRoundRect(_x + 9, _y + 9, _width, _height, 15, ILI9341_BLACK);
 			_lcd->fillRoundRect(_x, _y, _width, _height, 15, _off_color);
+			
 			_off_func();
 		}
-
-		_last_touch=false;
 	}
 }
 
@@ -172,7 +173,7 @@ void Slider::setSpecs(int x, int size, int color, float *parameter,
 	
 	_padding = 50;
 	_length = ILI9341_TFTWIDTH - _padding * 2; //pixels
-	_start=true;
+	_start = true;
 	
 	*_parameter = init;
 }
