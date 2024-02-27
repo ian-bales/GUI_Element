@@ -47,7 +47,6 @@ class ToggleSwitch {
 		Adafruit_ILI9341 *_lcd;
 		bool _toggle_state;
 		bool _last_touch;
-		bool _start;
 };
 
 class Slider {
