@@ -80,7 +80,6 @@ ToggleSwitch::ToggleSwitch(int x, int y, int width, int height,
 	
 	_toggle_state = true;
 	_last_touch = true;
-	_start = true;
 }
 
 void ToggleSwitch::setSpecs(int x, int y, int width, int height,
