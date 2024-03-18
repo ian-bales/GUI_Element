@@ -155,7 +155,7 @@ Slider::Slider(int x, int size, int color, float *parameter,
 	
 	_padding = 50;
 	_length = ILI9341_TFTWIDTH - _padding * 2; //pixels
-	_start=true;
+	_start = true;
 	
 	*_parameter = init;
 }
@@ -189,7 +189,7 @@ bool Slider::updateAndDraw(int x, int y) {
 		_lcd->fillRoundRect(3 + _x - 1.5 * _size / 2, 3 + _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 1.5 * _size, _size, 10, ILI9341_BLACK);
 		_lcd->fillRoundRect(_x - 1.5 * _size / 2, _padding + _length * (_max - *_parameter) / (_max - _min) - _size / 2, 1.5 * _size, _size, 10, _color);
 		
-		_start=false;
+		_start = false;
 	}
 	
 	if (checkTouch(x, y)) {
