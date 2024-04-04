@@ -105,19 +105,19 @@ void ToggleSwitch::updateAndDraw(int x, int y) {
 	if (checkTouch(x, y)) {
 		if (!_last_touch) {
 			if (_toggle_state)
-				button_color=_on_color;
+				button_color = _on_color;
 			else
-				button_color=_off_color;
+				button_color = _off_color;
 
 			_lcd->fillRect(-1 + _x, -1 + _y, _width + 11, _height + 11, ILI9341_WHITE);
 			_lcd->fillRoundRect(_x + 9, _y + 9, _width, _height, 15, ILI9341_BLACK);
-			_lcd->fillRoundRect(_x + 6, _y + 6, _width, _height, 15,button_color);
+			_lcd->fillRoundRect(_x + 6, _y + 6, _width, _height, 15, button_color);
 
 			_last_touch = true;
 		}
 	} else if (_last_touch) {
-		_toggle_state=!_toggle_state;
-		_last_touch=false;
+		_toggle_state = !_toggle_state;
+		_last_touch = false;
 		
 		_lcd->fillRect(-1 + _x, -1 + _y, _width + 11, _height + 11, ILI9341_WHITE);
 		
